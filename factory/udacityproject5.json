@@ -1,0 +1,9 @@
+{
+	"name": "udacityproject5",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "36b1d29c-8140-4ee0-828c-bc470a0124a9",
+		"tenantId": "9b7cbd77-6d6b-4879-8aba-63d7dfb18472"
+	}
+}
