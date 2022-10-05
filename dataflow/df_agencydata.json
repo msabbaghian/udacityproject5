@@ -14,7 +14,11 @@
 			],
 			"sinks": [
 				{
-					"name": "sink1"
+					"dataset": {
+						"referenceName": "synapse_agency",
+						"type": "DatasetReference"
+					},
+					"name": "synapseagency"
 				}
 			],
 			"transformations": [],
@@ -28,8 +32,19 @@
 				"     ignoreNoFilesFound: false) ~> agencycsv",
 				"agencycsv sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          AgencyID as string,",
+				"          AgencyName as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> synapseagency"
 			]
 		}
 	}
