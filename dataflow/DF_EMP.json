@@ -1,40 +1,42 @@
 {
-	"name": "DF_agencydata",
+	"name": "DF_EMP",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DS_AgencyMaster",
+						"referenceName": "DS_EmpMaster",
 						"type": "DatasetReference"
 					},
-					"name": "agencycsv"
+					"name": "employeecsv"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "synapse_agency",
+						"referenceName": "synapse_EMP",
 						"type": "DatasetReference"
 					},
-					"name": "synapseagency"
+					"name": "synapseemployee"
 				}
 			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          AgencyID as string,",
-				"          AgencyName as string",
+				"          EmployeeID as string,",
+				"          LastName as string,",
+				"          FirstName as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> agencycsv",
-				"agencycsv sink(allowSchemaDrift: true,",
+				"     ignoreNoFilesFound: false) ~> employeecsv",
+				"employeecsv sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          AgencyID as string,",
-				"          AgencyName as string",
+				"          EmployeeID as string,",
+				"          LastName as string,",
+				"          FirstName as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -42,9 +44,10 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     staged: true,",
+				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> synapseagency"
+				"     errorHandlingOption: 'stopOnFirstError') ~> synapseemployee"
 			]
 		}
 	}

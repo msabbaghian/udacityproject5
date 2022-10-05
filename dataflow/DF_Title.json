@@ -1,40 +1,40 @@
 {
-	"name": "DF_agencydata",
+	"name": "DF_Title",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "DS_AgencyMaster",
+						"referenceName": "DS_TitleMaster",
 						"type": "DatasetReference"
 					},
-					"name": "agencycsv"
+					"name": "titlecsv"
 				}
 			],
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "synapse_agency",
+						"referenceName": "synapse_Title",
 						"type": "DatasetReference"
 					},
-					"name": "synapseagency"
+					"name": "synapsetitle"
 				}
 			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
-				"          AgencyID as string,",
-				"          AgencyName as string",
+				"          TitleCode as string,",
+				"          TitleDescription as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> agencycsv",
-				"agencycsv sink(allowSchemaDrift: true,",
+				"     ignoreNoFilesFound: false) ~> titlecsv",
+				"titlecsv sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          AgencyID as string,",
-				"          AgencyName as string",
+				"          TitleCode as string,",
+				"          TitleDescription as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -42,9 +42,10 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     staged: true,",
+				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> synapseagency"
+				"     errorHandlingOption: 'stopOnFirstError') ~> synapsetitle"
 			]
 		}
 	}
